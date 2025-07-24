@@ -1,0 +1,12 @@
+{
+  "name": "shopify-whatsapp-app",
+  "version": "1.0.0",
+  "description": "Free Shopify WhatsApp App using Node.js",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
