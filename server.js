@@ -1,7 +1,8 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import { shopifyApi, LATEST_API_VERSION } from '@shopify/shopify-api';
-import { nodeAdapter } from '@shopify/shopify-api/adapters/node';
+import pkg from '@shopify/shopify-api/adapters/node';
+const { nodeAdapter } = pkg;
 
 dotenv.config();
 
@@ -15,7 +16,7 @@ const shopify = shopifyApi({
   hostName: new URL(process.env.HOST).host,
   apiVersion: LATEST_API_VERSION,
   isEmbeddedApp: false,
-  adapter: nodeAdapter, // ✅ Add this line
+  adapter: nodeAdapter, // ✅ Correctly used
 });
 
 app.get('/', (req, res) => {
