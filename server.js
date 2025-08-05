@@ -1,7 +1,8 @@
 import express from 'express';
 import dotenv from 'dotenv';
-import { shopifyApi, LATEST_API_VERSION, restResources } from '@shopify/shopify-api'; // ✅ Yahan se import karo
+import { shopifyApi, LATEST_API_VERSION } from '@shopify/shopify-api';
 import { nodeAdapter } from '@shopify/shopify-api/adapters/node';
+import { restResources } from '@shopify/shopify-api/rest/admin'; // ✅ Works in v6.4.2
 
 dotenv.config();
 
@@ -16,7 +17,7 @@ const shopify = shopifyApi({
   apiVersion: LATEST_API_VERSION,
   isEmbeddedApp: false,
   adapter: nodeAdapter,
-  restResources, // ✅ Yeh sahi hai
+  restResources,
 });
 
 app.get('/', (req, res) => {
