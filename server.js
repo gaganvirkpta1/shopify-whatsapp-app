@@ -2,12 +2,16 @@ import express from 'express';
 import dotenv from 'dotenv';
 import { shopifyApi, LATEST_API_VERSION } from '@shopify/shopify-api';
 import pkg from '@shopify/shopify-api/adapters/node';
+
 const { nodeAdapter } = pkg;
 
 dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 3000;
+
+// ✅ Serve public folder statically
+app.use(express.static('public'));
 
 const shopify = shopifyApi({
   apiKey: process.env.SHOPIFY_API_KEY,
@@ -16,7 +20,7 @@ const shopify = shopifyApi({
   hostName: new URL(process.env.HOST).host,
   apiVersion: LATEST_API_VERSION,
   isEmbeddedApp: false,
-  adapter: nodeAdapter, // ✅ Correctly used
+  adapter: nodeAdapter,
 });
 
 app.get('/', (req, res) => {
