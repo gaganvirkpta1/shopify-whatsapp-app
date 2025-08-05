@@ -12,11 +12,18 @@ const port = process.env.PORT || 3000;
 const shopify = shopifyApi({
   apiKey: process.env.SHOPIFY_API_KEY,
   apiSecretKey: process.env.SHOPIFY_API_SECRET,
-  scopes: process.env.SCOPES.split(','),
-  hostName: new URL(process.env.HOST).host,
+  scopes: process.env.SCOPES ? process.env.SCOPES.split(',') : [],
+  hostName: (() => {
+    try {
+      return new URL(process.env.HOST).host;
+    } catch {
+      console.error("Environment variable HOST is not a valid URL");
+      return '';
+    }
+  })(),
   apiVersion: LATEST_API_VERSION,
   isEmbeddedApp: false,
-  adapter: nodeAdapter,
+  adapter: nodeAdapter(),
   restResources,
 });
 
