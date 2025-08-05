@@ -1,12 +1,14 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import { shopifyApi, LATEST_API_VERSION } from '@shopify/shopify-api';
-import { nodeAdapter } from '@shopify/shopify-api/adapters/node';
+import { MemorySessionStorage } from '@shopify/shopify-api/dist/bootstrap.js';
 
 dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 3000;
+
+const sessionStorage = new MemorySessionStorage();
 
 const shopify = shopifyApi({
   apiKey: process.env.SHOPIFY_API_KEY,
@@ -15,15 +17,13 @@ const shopify = shopifyApi({
   hostName: new URL(process.env.HOST).host,
   apiVersion: LATEST_API_VERSION,
   isEmbeddedApp: false,
-  adapter: nodeAdapter(),
+  sessionStorage,
 });
 
-// Simple home route
 app.get('/', (req, res) => {
   res.send('Shopify WhatsApp App is Running 🚀');
 });
 
-// Start the server
 app.listen(port, () => {
-  console.log(`Server running on port ${port}`);
+  console.log(`Server is running on port ${port}`);
 });
