@@ -2,10 +2,138 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>WhatsApp Chat</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WhatsApp Chat Widget - Shopify App</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #f5f5f5;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    h1 {
+      color: #25D366;
+      text-align: center;
+    }
+    .demo-section {
+      margin: 30px 0;
+      padding: 20px;
+      background: #f9f9f9;
+      border-radius: 8px;
+    }
+    .code-block {
+      background: #2d3748;
+      color: #e2e8f0;
+      padding: 15px;
+      border-radius: 5px;
+      overflow-x: auto;
+      font-family: 'Courier New', monospace;
+      font-size: 14px;
+    }
+    .installation-steps {
+      background: #e6fffa;
+      border-left: 4px solid #25D366;
+      padding: 15px;
+      margin: 20px 0;
+    }
+    .feature-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 15px;
+      margin: 20px 0;
+    }
+    .feature-item {
+      background: white;
+      padding: 15px;
+      border-radius: 8px;
+      border: 1px solid #e2e8f0;
+    }
+    .feature-item h3 {
+      color: #25D366;
+      margin-top: 0;
+    }
+  </style>
 </head>
 <body>
-  <h2>WhatsApp Chat Integration</h2>
-  <a href="https://wa.me/919999999999" target="_blank">Chat with us on WhatsApp</a>
+  <div class="container">
+    <h1>🚀 WhatsApp Chat Widget for Shopify</h1>
+    
+    <div class="demo-section">
+      <h2>✨ Features</h2>
+      <div class="feature-list">
+        <div class="feature-item">
+          <h3>📱 Mobile Responsive</h3>
+          <p>Works perfectly on all devices - desktop, tablet, and mobile</p>
+        </div>
+        <div class="feature-item">
+          <h3>🎨 Customizable</h3>
+          <p>Change colors, position, text, and animations to match your brand</p>
+        </div>
+        <div class="feature-item">
+          <h3>⚡ Fast Loading</h3>
+          <p>Lightweight script that doesn't slow down your store</p>
+        </div>
+        <div class="feature-item">
+          <h3>📊 Analytics Ready</h3>
+          <p>Built-in support for Google Analytics and Facebook Pixel tracking</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="demo-section">
+      <h2>🛠️ Installation Instructions</h2>
+      <div class="installation-steps">
+        <h3>Step 1: Add to your Shopify theme</h3>
+        <p>Copy the following script and paste it before the closing <code>&lt;/body&gt;</code> tag in your theme.liquid file:</p>
+      </div>
+      
+      <div class="code-block">
+&lt;script src="https://shopify-whatsapp-app-m6cy.onrender.com/app-embed.js"&gt;&lt;/script&gt;
+      </div>
+
+      <div class="installation-steps">
+        <h3>Step 2: Customize (Optional)</h3>
+        <p>To customize the widget, download the script and modify the config object at the top:</p>
+      </div>
+
+      <div class="code-block">
+const config = {
+  phoneNumber: '919999999999', // Your WhatsApp number
+  message: 'Hello! I need help with my order.',
+  buttonText: '💬 Chat with us',
+  position: 'bottom-right',
+  backgroundColor: '#25D366',
+  animation: 'pulse'
+};
+      </div>
+    </div>
+
+    <div class="demo-section">
+      <h2>🎯 Live Demo</h2>
+      <p>The WhatsApp widget is already active on this page! Look for the green chat button in the bottom-right corner.</p>
+      <p><strong>Note:</strong> The demo uses a placeholder number. Replace it with your actual WhatsApp business number.</p>
+    </div>
+
+    <div class="demo-section">
+      <h2>📞 Support</h2>
+      <p>Need help setting up the widget? Contact us through:</p>
+      <ul>
+        <li>📧 Email: support@yourstore.com</li>
+        <li>💬 WhatsApp: Click the widget button</li>
+        <li>🌐 Website: Visit your Shopify Partner dashboard</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Load the WhatsApp widget -->
+  <script src="app-embed.js"></script>
 </body>
 </html>
