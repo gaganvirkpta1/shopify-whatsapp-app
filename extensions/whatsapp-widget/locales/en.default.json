@@ -1,0 +1,47 @@
+{
+  "whatsapp_widget": {
+    "name": "WhatsApp Chat Widget",
+    "settings": {
+      "phone_number": {
+        "label": "WhatsApp Phone Number",
+        "info": "Enter your WhatsApp number with country code (e.g., 919999999999)"
+      },
+      "message": {
+        "label": "Default Message",
+        "info": "Default message that will be sent when customers click the widget"
+      },
+      "button_text": {
+        "label": "Button Text",
+        "info": "Text displayed on the WhatsApp button"
+      },
+      "position": {
+        "label": "Widget Position",
+        "options": {
+          "bottom-right": "Bottom Right",
+          "bottom-left": "Bottom Left",
+          "top-right": "Top Right",
+          "top-left": "Top Left"
+        }
+      },
+      "background_color": {
+        "label": "Background Color",
+        "info": "Background color of the WhatsApp button"
+      },
+      "animation": {
+        "label": "Animation",
+        "options": {
+          "pulse": "Pulse",
+          "bounce": "Bounce",
+          "none": "None"
+        }
+      },
+      "show_on_mobile": {
+        "label": "Show on Mobile"
+      },
+      "show_on_desktop": {
+        "label": "Show on Desktop"
+      }
+    }
+  }
+}
+

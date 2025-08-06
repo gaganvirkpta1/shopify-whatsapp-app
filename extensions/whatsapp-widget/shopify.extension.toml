@@ -1,0 +1,75 @@
+api_version = "2024-10"
+
+[[extensions]]
+type = "theme"
+name = "WhatsApp Chat Widget"
+
+[extensions.settings]
+[[extensions.settings.blocks]]
+type = "whatsapp_widget"
+name = "WhatsApp Chat Widget"
+target = "section_group_footer"
+
+[[extensions.settings.blocks.settings]]
+type = "text"
+id = "phone_number"
+label = "WhatsApp Phone Number"
+default = "919999999999"
+info = "Enter your WhatsApp number with country code (e.g., 919999999999)"
+
+[[extensions.settings.blocks.settings]]
+type = "text"
+id = "message"
+label = "Default Message"
+default = "Hello! I need help with my order."
+info = "Default message that will be sent when customers click the widget"
+
+[[extensions.settings.blocks.settings]]
+type = "text"
+id = "button_text"
+label = "Button Text"
+default = "💬 Chat with us"
+info = "Text displayed on the WhatsApp button"
+
+[[extensions.settings.blocks.settings]]
+type = "select"
+id = "position"
+label = "Widget Position"
+default = "bottom-right"
+options = [
+  { value = "bottom-right", label = "Bottom Right" },
+  { value = "bottom-left", label = "Bottom Left" },
+  { value = "top-right", label = "Top Right" },
+  { value = "top-left", label = "Top Left" }
+]
+
+[[extensions.settings.blocks.settings]]
+type = "color"
+id = "background_color"
+label = "Background Color"
+default = "#25D366"
+info = "Background color of the WhatsApp button"
+
+[[extensions.settings.blocks.settings]]
+type = "select"
+id = "animation"
+label = "Animation"
+default = "pulse"
+options = [
+  { value = "pulse", label = "Pulse" },
+  { value = "bounce", label = "Bounce" },
+  { value = "none", label = "None" }
+]
+
+[[extensions.settings.blocks.settings]]
+type = "checkbox"
+id = "show_on_mobile"
+label = "Show on Mobile"
+default = true
+
+[[extensions.settings.blocks.settings]]
+type = "checkbox"
+id = "show_on_desktop"
+label = "Show on Desktop"
+default = true
+
