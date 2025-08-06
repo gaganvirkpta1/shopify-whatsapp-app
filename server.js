@@ -1,6 +1,7 @@
 import express from 'express';
 import dotenv from 'dotenv';
-import { shopifyApi, LATEST_API_VERSION, MemorySessionStorage } from '@shopify/shopify-api';
+import { shopifyApi, LATEST_API_VERSION } from '@shopify/shopify-api';
+import { MemorySessionStorage } from '@shopify/shopify-api/dist/storage/memory';
 
 dotenv.config();
 
