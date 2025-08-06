@@ -1,14 +1,14 @@
 import express from 'express';
 import dotenv from 'dotenv';
-import { shopifyApi, LATEST_API_VERSION } from '@shopify/shopify-api';
-import { MemorySessionStorage } from '@shopify/shopify-api/dist/storage/memory';
+import { shopifyApi, LATEST_API_VERSION, session } from '@shopify/shopify-api';
 
 dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 3000;
 
-const sessionStorage = new MemorySessionStorage();
+// Use the officially supported in-memory session storage
+const sessionStorage = new session.MemorySessionStorage();
 
 const shopify = shopifyApi({
   apiKey: process.env.SHOPIFY_API_KEY,
