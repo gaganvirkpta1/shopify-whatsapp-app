@@ -2,15 +2,18 @@
   "type": "module",
   "name": "shopify-whatsapp-app",
   "version": "1.0.0",
-  "description": "Free Shopify WhatsApp App using Node.js",
+  "description": "Complete Shopify WhatsApp App with Theme App Extensions using Node.js",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "dev": "shopify app dev",
+    "build": "shopify app build",
+    "deploy": "shopify app deploy"
   },
   "dependencies": {
-    "@shopify/shopify-api": "^11.14.1",
-    "@shopify/shopify-app-session-storage-memory": "^4.0.20",
-    "dotenv": "^16.4.5",
-    "express": "^4.18.2"
+    "express": "^4.18.2",
+    "@shopify/shopify-api": "^10.0.0",
+    "@shopify/shopify-app-session-storage-memory": "^3.0.0",
+    "dotenv": "^16.4.5"
   }
 }

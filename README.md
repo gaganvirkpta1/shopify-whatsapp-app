@@ -1,22 +1,31 @@
-# 🚀 Shopify WhatsApp App
+# 🚀 Shopify WhatsApp App with Theme App Extensions
 
-A complete WhatsApp integration app for Shopify stores that allows customers to easily contact store owners via WhatsApp.
+A complete WhatsApp integration app for Shopify stores that **automatically embeds** the widget into themes without manual code injection.
 
-## ✨ Features
+## ✨ Key Features
 
-- 📱 **Mobile Responsive**: Works perfectly on all devices
-- 🎨 **Customizable**: Change colors, position, text, and animations
-- ⚡ **Fast Loading**: Lightweight script that doesn't slow down your store
-- 📊 **Analytics Ready**: Built-in support for Google Analytics and Facebook Pixel
-- 🔧 **Easy Installation**: Simple script integration
-- 🌐 **Multi-language Support**: Supports Hindi and English
+- 🎯 **Automatic Installation** - No manual code copying required
+- 📱 **Mobile Responsive** - Works perfectly on all devices
+- 🎨 **Theme Customizer Integration** - Easy settings panel in Shopify admin
+- ⚡ **Fast Loading** - Lightweight script that doesn't slow down stores
+- 📊 **Analytics Ready** - Built-in support for Google Analytics and Facebook Pixel
+- 🌐 **Multi-language Support** - Hindi and English included
+- 🔧 **No Theme Conflicts** - Works with theme updates
+
+## 🎯 How It Works
+
+### Traditional Method (Manual)
+❌ Merchant installs app → Copies script → Pastes in theme.liquid → Configures manually
+
+### Our Method (Automatic)
+✅ Merchant installs app → Widget appears in theme customizer → Configure with GUI → Done!
 
 ## 🛠️ Installation & Setup
 
 ### Prerequisites
 - Node.js (v18 or higher)
-- npm or yarn
-- Shopify Partner account
+- Shopify Partners account
+- Shopify CLI installed globally
 - WhatsApp Business number
 
 ### Local Development
@@ -33,7 +42,7 @@ A complete WhatsApp integration app for Shopify stores that allows customers to 
    ```
 
 3. **Configure environment variables**
-   Update the `.env` file with your Shopify app credentials:
+   Update the `.env` file:
    ```env
    SHOPIFY_API_KEY=your_api_key_here
    SHOPIFY_API_SECRET=your_api_secret_here
@@ -42,60 +51,50 @@ A complete WhatsApp integration app for Shopify stores that allows customers to 
    SHOP=your-shop.myshopify.com
    ```
 
-4. **Start the development server**
+4. **Start development server**
    ```bash
    npm start
    ```
 
-5. **Test locally**
-   Visit `http://localhost:3000` to see your app running.
+## 🚀 Theme App Extension Deployment
 
-## 🚀 Deployment Options
+### Install Shopify CLI
+```bash
+npm install -g @shopify/cli @shopify/theme
+```
 
-### Option 1: Render (Recommended)
-1. Connect your GitHub repository to Render
-2. Set environment variables in Render dashboard
-3. Deploy automatically on git push
+### Deploy Extension
+```bash
+shopify auth login
+shopify app deploy
+```
 
-### Option 2: Heroku
-1. Install Heroku CLI
-2. Create new Heroku app: `heroku create your-app-name`
-3. Set environment variables: `heroku config:set SHOPIFY_API_KEY=your_key`
-4. Deploy: `git push heroku main`
+### For Merchants (After Installation)
+1. Go to **Online Store > Themes > Customize**
+2. Add **"WhatsApp Chat Widget"** block
+3. Configure settings in the sidebar
+4. Save and publish
 
-### Option 3: Vercel
-1. Install Vercel CLI: `npm i -g vercel`
-2. Deploy: `vercel --prod`
-3. Set environment variables in Vercel dashboard
+## 📱 Widget Configuration
 
-## 📱 WhatsApp Widget Integration
+Merchants can customize these settings in their theme editor:
 
-### For Shopify Store Owners
-
-1. **Add to theme.liquid**
-   Add this script before the closing `</body>` tag in your theme.liquid file:
-   ```html
-   <script src="https://your-app-url.com/app-embed.js"></script>
-   ```
-
-2. **Customize the widget**
-   Download the `app-embed.js` file and modify the config object:
-   ```javascript
-   const config = {
-     phoneNumber: '919999999999', // Your WhatsApp number with country code
-     message: 'Hello! I need help with my order.',
-     buttonText: '💬 Chat with us',
-     position: 'bottom-right', // bottom-right, bottom-left, top-right, top-left
-     backgroundColor: '#25D366',
-     animation: 'pulse' // pulse, bounce, none
-   };
-   ```
+| Setting | Description | Default |
+|---------|-------------|---------|
+| Phone Number | WhatsApp number with country code | 919999999999 |
+| Default Message | Pre-filled message text | "Hello! I need help..." |
+| Button Text | Text on the widget button | "💬 Chat with us" |
+| Position | Widget placement | Bottom Right |
+| Background Color | Button background color | #25D366 |
+| Animation | Button animation style | Pulse |
+| Mobile Visibility | Show on mobile devices | Yes |
+| Desktop Visibility | Show on desktop | Yes |
 
 ## 🔧 API Endpoints
 
-- `GET /` - Main app page
+- `GET /` - Main app page with demo
 - `GET /whatsapp-widget` - Widget demo page
-- `GET /api/whatsapp-script` - Returns the widget JavaScript
+- `GET /api/whatsapp-script` - Legacy script endpoint
 - `GET /auth` - Begin Shopify OAuth flow
 - `GET /auth/callback` - OAuth callback handler
 - `GET /health` - Health check endpoint
@@ -104,53 +103,95 @@ A complete WhatsApp integration app for Shopify stores that allows customers to 
 
 ```
 shopify-whatsapp-app/
-├── server.js              # Main server file
-├── package.json           # Dependencies and scripts
-├── .env                   # Environment variables
-├── README.md             # This file
-└── public/
-    ├── index.html        # Widget demo page
-    ├── whatsapp.js       # Simple widget script
-    └── app-embed.js      # Advanced widget script
+├── extensions/
+│   └── whatsapp-widget/
+│       ├── blocks/
+│       │   └── whatsapp-widget.liquid    # Main widget block
+│       ├── locales/
+│       │   ├── en.default.json          # English translations
+│       │   └── hi.json                  # Hindi translations
+│       └── shopify.extension.toml       # Extension configuration
+├── public/
+│   ├── index.html                       # Demo page
+│   ├── whatsapp.js                      # Legacy widget script
+│   └── app-embed.js                     # Advanced widget script
+├── server.js                            # Main server file
+├── shopify.app.toml                     # App configuration
+├── package.json                         # Dependencies
+├── README.md                            # This file
+└── THEME_APP_EXTENSION_GUIDE.md         # Detailed extension guide
 ```
 
 ## 🔒 Security Features
 
 - ✅ Shopify OAuth integration
-- ✅ Session management with MemorySessionStorage
-- ✅ Environment variable protection
-- ✅ CORS support for cross-origin requests
+- ✅ Theme App Extension security model
+- ✅ No direct theme file modification
+- ✅ Sandboxed execution environment
+- ✅ GDPR compliant (no data collection)
+
+## 🌐 Multi-language Support
+
+The extension includes translations for:
+- **English** (default)
+- **Hindi** (हिंदी)
+- Easy to add more languages
 
 ## 🐛 Troubleshooting
 
-### Common Issues
+### Extension Not Showing
+1. Verify app installation in Shopify admin
+2. Check if extension is enabled
+3. Ensure theme compatibility
 
-1. **Import Error: MemorySessionStorage**
-   - Solution: Install `@shopify/shopify-app-session-storage-memory`
-   - Command: `npm install @shopify/shopify-app-session-storage-memory`
+### Widget Not Appearing
+1. Check if block is added to theme
+2. Verify device visibility settings
+3. Clear browser cache
 
-2. **Missing adapter implementation error**
-   - Solution: Import Node.js adapter before shopifyApi
-   - Add: `import '@shopify/shopify-api/adapters/node';`
+### Settings Not Saving
+1. Check theme customizer permissions
+2. Verify extension configuration
+3. Test with different browser
 
-3. **App not loading in Shopify**
-   - Check if HOST URL is correct in .env
-   - Ensure app is publicly accessible
-   - Verify Shopify app settings
+## 📊 Analytics Integration
 
-### Error Fixes Applied
+Built-in support for:
+```javascript
+// Google Analytics
+gtag('event', 'whatsapp_click', {
+  event_category: 'engagement',
+  event_label: 'whatsapp_widget'
+});
 
-✅ Fixed MemorySessionStorage import path
-✅ Added Node.js adapter import
-✅ Updated package dependencies
-✅ Added proper error handling
-✅ Implemented OAuth flow
+// Facebook Pixel
+fbq('track', 'Contact');
+```
+
+## 🚀 Deployment Options
+
+### Option 1: Shopify App Store (Recommended)
+1. Complete app development
+2. Submit for Shopify review
+3. Get approved and listed
+4. Merchants install automatically
+
+### Option 2: Custom App
+1. Deploy to Render/Heroku
+2. Create custom app in merchant's admin
+3. Install manually for specific stores
+
+### Option 3: Development Store
+1. Use for testing and development
+2. Perfect for client projects
+3. No app store submission needed
 
 ## 📞 Support
 
 - 📧 Email: support@yourstore.com
-- 💬 WhatsApp: Use the widget on the demo page
+- 💬 WhatsApp: Use the widget on demo page
 - 🌐 GitHub: [Create an issue](https://github.com/gaganvirkpta1/shopify-whatsapp-app/issues)
+- 📖 Documentation: See `THEME_APP_EXTENSION_GUIDE.md`
 
 ## 📄 License
 
@@ -165,4 +206,4 @@ This project is licensed under the MIT License.
 
 ---
 
-**Made with ❤️ for Shopify merchants who want to connect with their customers via WhatsApp**
+**Made with ❤️ for Shopify merchants who want seamless WhatsApp integration**
