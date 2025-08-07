@@ -57,6 +57,30 @@ app.get('/auth/callback', async (req, res) => {
     if (session) {
       // Store session
       await sessionStorage.storeSession(session);
+
+      // Create Script Tag after successful installation
+      const client = new shopify.clients.Rest({
+        session,
+        apiVersion: LATEST_API_VERSION,
+      });
+
+      try {
+        await client.post({
+          path: 'script_tags',
+          data: {
+            script_tag: {
+              event: 'onload',
+              src: `${process.env.HOST}/api/whatsapp-script`,
+              display_scope: 'all',
+            },
+          },
+          type: 'application/json',
+        });
+        console.log('Script Tag created successfully!');
+      } catch (scriptTagError) {
+        console.error('Error creating Script Tag:', scriptTagError);
+      }
+
       res.redirect('/');
     } else {
       res.status(400).send('Authentication failed');
