@@ -85,10 +85,17 @@ app.get('/auth', async (req, res) => {
   }
 });
 
-// API endpoint to get WhatsApp widget script
+// API endpoint to get WhatsApp widget script (now serving auto-installer.js)
 app.get('/api/whatsapp-script', (req, res) => {
   res.setHeader('Content-Type', 'application/javascript');
-  res.sendFile(path.join(__dirname, 'public', 'whatsapp.js'));
+  res.sendFile(path.join(__dirname, 'public', 'auto-installer.js'));
+});
+
+// API endpoint for analytics tracking from auto-installer.js
+app.post('/api/analytics/widget-click', (req, res) => {
+  console.log('Widget click event received:', req.body);
+  // You can store this data in a database or send it to an analytics service
+  res.status(200).json({ message: 'Analytics received' });
 });
 
 // Health check endpoint
