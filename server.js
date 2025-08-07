@@ -57,30 +57,6 @@ app.get('/auth/callback', async (req, res) => {
     if (session) {
       // Store session
       await sessionStorage.storeSession(session);
-
-      // Create Script Tag after successful installation
-      const client = new shopify.clients.Rest({
-        session,
-        apiVersion: LATEST_API_VERSION,
-      });
-
-      try {
-        await client.post({
-          path: 'script_tags',
-          data: {
-            script_tag: {
-              event: 'onload',
-              src: `${process.env.HOST}/api/whatsapp-script`,
-              display_scope: 'all',
-            },
-          },
-          type: 'application/json',
-        });
-        console.log('Script Tag created successfully!');
-      } catch (scriptTagError) {
-        console.error('Error creating Script Tag:', scriptTagError);
-      }
-
       res.redirect('/');
     } else {
       res.status(400).send('Authentication failed');
@@ -109,8 +85,8 @@ app.get('/auth', async (req, res) => {
   }
 });
 
-// API endpoint to get WhatsApp widget script (now serving auto-installer.js)
-app.get('/api/whatsapp-script', (req, res) => {
+// App Proxy endpoint to serve the auto-installer.js script
+app.get('/proxy', (req, res) => {
   res.setHeader('Content-Type', 'application/javascript');
   res.sendFile(path.join(__dirname, 'public', 'auto-installer.js'));
 });
