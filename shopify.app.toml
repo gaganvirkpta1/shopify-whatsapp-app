@@ -1,0 +1,29 @@
+# This is the configuration file for your app.
+# After changing this file, run `shopify app config push` to push your changes to Shopify.
+
+client_id = "cbd3b7ab27e913ec1d9cf3bec9cd78ad"
+name = "whatsapp-chat-widget"
+application_url = "https://shopify-whatsapp-app-m6cy.onrender.com"
+embedded = false
+
+[access_scopes]
+# Learn more at https://shopify.dev/docs/apps/tools/cli/configuration#access_scopes
+scopes = "write_themes,read_themes"
+
+[auth]
+redirect_urls = [
+  "https://shopify-whatsapp-app-m6cy.onrender.com/auth/callback"
+]
+
+[webhooks]
+api_version = "2024-07"
+
+[pos]
+embedded = false
+
+[build]
+include_config_on_deploy = true
+
+# The following line is a build command. It is not required for deployment.
+# [build]
+# command = "npm run build"

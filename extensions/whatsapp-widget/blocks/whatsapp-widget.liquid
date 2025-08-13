@@ -1,0 +1,110 @@
+{%- liquid
+  assign phone_number = block.settings.phone_number
+  assign button_text = block.settings.button_text | default: "Chat with us"
+  assign welcome_message = block.settings.welcome_message | default: "Hello! I have a question."
+  assign encoded_message = welcome_message | url_encode
+
+  assign button_color = block.settings.button_color | default: "#25D366"
+  assign button_position = block.settings.button_position | default: "right"
+-%}
+
+<style>
+  .whatsapp-widget-container-{{ block.id }} {
+    position: fixed;
+    bottom: 25px;
+    z-index: 999;
+    {{ button_position }}: 25px;
+  }
+  .whatsapp-widget-button-{{ block.id }} {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px; /* This adds space between the icon and the text */
+    padding: 12px 20px;
+    background-color: {{ button_color }};
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 50px;
+    font-size: 16px;
+    font-weight: bold;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  }
+  .whatsapp-widget-button-{{ block.id }}:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+  }
+  .whatsapp-icon-{{ block.id }} {
+    width: 24px;
+    height: 24px;
+    fill: #ffffff; /* This makes the icon white */
+  }
+</style>
+
+{% if phone_number != blank %}
+  <div class="whatsapp-widget-container-{{ block.id }}">
+    <a href="https://wa.me/{{ phone_number }}?text={{ encoded_message }}" class="whatsapp-widget-button-{{ block.id }}" target="_blank" rel="noopener noreferrer">
+      <svg class="whatsapp-icon-{{ block.id }}" viewBox="0 0 90 90" xmlns="http://www.w3.org/2000/svg"><path d="M90 43.84c0 24.21-19.78 43.84-44.18 43.84-7.4 0-14.44-1.86-20.55-5.24l-21.27 5.24 5.37-20.8c-3.86-6.4-6.1-13.8-6.1-21.75C3.27 19.63 23.05 0 47.25 0 71.45 0 90 19.63 90 43.84zM47.25 7.5c-20.12 0-36.48 16.36-36.48 36.34 0 7.68 2.36 14.9 6.64 20.92l-3.22 12.48 12.7-3.14c5.74 3.53 12.18 5.5 18.9 5.5 21.56 0 37.94-16.36 37.94-36.34S68.8 7.5 47.25 7.5zM67.33 54.2c-.24-.42-1.5-2.04-1.74-2.46-.24-.42-1.98-2.64-2.46-2.88-.48-.24-1.2-.24-1.68.24-.48.48-1.68 1.92-2.16 2.4-.48.48-.96.54-1.68.12-.72-.42-2.88-1.08-5.4-3.36-1.92-1.8-3.36-4.08-3.72-4.8-.36-.72 0-1.08.3-1.44.3-.3.72-.72.96-1.02.3-.3.42-.48.72-.9.24-.42.12-.84-.06-1.08-.18-.24-1.68-4.08-2.28-5.52-.6-.96-1.2-.84-1.68-.84-.42 0-1.02-.06-1.5-.06-.48 0-1.26.18-1.92.9-.66.72-2.52 2.46-2.52 6s.06 7.02 1.74 8.7c1.62 1.68 5.04 8.1 12.18 11.4 7.08 3.3 7.08 2.22 8.34 2.1.72-.06 2.28-.96 2.64-1.86.36-.9.36-1.68.24-1.86z"/></svg>
+      <span>{{ button_text }}</span>
+    </a>
+  </div>
+{% endif %}
+
+{% schema %}
+{
+  "name": "WhatsApp Widget",
+  "target": "body",
+  "settings": [
+    {
+      "type": "header",
+      "content": "General Settings"
+    },
+    {
+      "type": "text",
+      "id": "phone_number",
+      "label": "WhatsApp Phone Number",
+      "info": "Enter your full phone number including country code (e.g., 919999999999 )."
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text",
+      "default": "Chat with us"
+    },
+    {
+      "type": "textarea",
+      "id": "welcome_message",
+      "label": "Welcome Message",
+      "default": "Hello! I have a question."
+    },
+    {
+      "type": "header",
+      "content": "Appearance Settings"
+    },
+    {
+      "type": "color",
+      "id": "button_color",
+      "label": "Button Color",
+      "default": "#25D366"
+    },
+    {
+      "type": "select",
+      "id": "button_position",
+      "label": "Button Position",
+      "options": [
+        {
+          "value": "right",
+          "label": "Bottom Right"
+        },
+        {
+          "value": "left",
+          "label": "Bottom Left"
+        }
+      ],
+      "default": "right"
+    }
+  ]
+}
+{% endschema %}
